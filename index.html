@@ -1,42 +1,615 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Hamjakti Portfolio</title>
-  </head>
-  <body>
-    <nav class="p-5 flex items-center
-    justify-around shadow-md bg-transparent fixed w-full">
-      <h1 class="text-3xl 
-      font-bold text-white">Logo</h1>
-      <ul class="flex gap-10 text-white">
-        <li><a href="">Home</a></li>
-        <li><a href="">Services</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Porfolio</a></li>
-        <li><a href="">Contact</a></li>
-      </ul>
-    </nav>
-    <header class="bg-slate-900 h-screen flex items-center justify-around">
-        <div class="w-1/2">
-            <h2 class="text-white">
-                welcome to my world
-            </h2>
-            <h1 class="text-white">I'm Hamjakti Tripura <br>
-                A Web Designer
-            </h1>
-            <p class="text-white">I'm Hamjakti Tripura, a passionate web developer with a strong focus on creating clean, responsive, and user-friendly websites. I specialize in front-end and back-end development using technologies like HTML, CSS, JavaScript, and frameworks such as React and Node.js. My goal is to build web solutions that are both visually appealing and highly functional. I enjoy solving problems through code and continuously learning new tools to stay updated in the ever-evolving tech world. Whether it's a simple landing page or a full-stack application, I strive to deliver high-quality work that meets client needs and enhances user experience.</p>
-        </div>
-        <div class="bg-slate-800 p-5 rounded-md">
-            <img class="rounded-md" src="./laptop student.jpg" alt="">
-        </div>
-        <a href=""></a>
-        <a href=""></a>
-        <a href=""></a>
-        <a href=""></a>
-        <div></div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamjakti - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .opacity-0 {
+            opacity: 0;
+        }
+
+        .wave-divider {
+            position: relative;
+            height: 120px;
+            background: white;
+        }
+
+        .wave-divider svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 500px;
+        }
+
+        .portfolio-item {
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a855f7;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Hamjakti
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-gray-700 font-medium">Home</a>
+                <a href="#services" class="nav-link text-gray-700 font-medium">Services</a>
+                <a href="#portfolio" class="nav-link text-gray-700 font-medium">Portfolio</a>
+                <a href="#testimonials" class="nav-link text-gray-700 font-medium">Testimonials</a>
+                <a href="#contact" class="nav-link text-gray-700 font-medium">Contact</a>
+            </div>
+            <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-all">
+                Get Started
+            </button>
+        </nav>
     </header>
-  </body>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="opacity-0 animate-fade-in-up">
+                    <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+                        Hey!, I'm Hamjakti
+                    </h1>
+                    <p class="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+                        I am Hamjakti, a passionate web designer dedicated to creating visually appealing and user-friendly websites. With a strong eye for detail and creativity, I craft responsive designs that enhance user experience and help businesses stand out online. Let's bring your digital vision to life!
+                    </p>
+                    <div class="flex gap-4">
+                        <button class="bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all transform hover:scale-105">
+                            View My Work
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all">
+                            Contact Me
+                        </button>
+                    </div>
+                </div>
+                <div class="opacity-0 animate-slide-in-right">
+                    <div class="relative h-96 md:h-full">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-3xl animate-float"></div>
+                        <div class="absolute top-10 right-10 w-32 h-32 bg-white/20 rounded-2xl animate-pulse-glow"></div>
+                        <div class="absolute bottom-20 left-10 w-40 h-40 bg-white/10 rounded-3xl animate-float" style="animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider mt-20">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="white"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-600 text-lg mb-12 font-semibold">Trusted by companies like</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-items-center">
+                <div class="text-3xl font-bold text-gray-400 hover:text-gray-600 transition-colors">Microsoft</div>
+                <div class="text-3xl font-bold text-gray-400 hover:text-gray-600 transition-colors">Google</div>
+                <div class="text-3xl font-bold text-gray-400 hover:text-gray-600 transition-colors">Spotify</div>
+                <div class="text-3xl font-bold text-gray-400 hover:text-gray-600 transition-colors">Adobe</div>
+                <div class="text-3xl font-bold text-gray-400 hover:text-gray-600 transition-colors">CNN</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">Our Services</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    We provide comprehensive digital solutions designed to elevate your brand and drive results. From strategy to execution, we're here to help you succeed.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-3xl p-12 shadow-lg">
+                    <div class="text-5xl mb-6">🎨</div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Marketing</h3>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        Strategic marketing solutions that connect your brand with the right audience. We create campaigns that drive engagement and growth.
+                    </p>
+                    <button class="text-purple-600 font-bold text-lg hover:text-purple-700 transition-colors">Learn More →</button>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-12 shadow-lg">
+                    <div class="text-5xl mb-6">💻</div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Web Development</h3>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        Modern, responsive websites built with the latest technologies. We create digital experiences that convert visitors into customers.
+                    </p>
+                    <button class="text-purple-600 font-bold text-lg hover:text-purple-700 transition-colors">Learn More →</button>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-12 shadow-lg">
+                    <div class="text-5xl mb-6">🎯</div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">UI/UX Design</h3>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        Beautiful, intuitive interfaces that users love. We design experiences that are both visually stunning and highly functional.
+                    </p>
+                    <button class="text-purple-600 font-bold text-lg hover:text-purple-700 transition-colors">Learn More →</button>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-3xl p-12 shadow-lg">
+                    <div class="text-5xl mb-6">📱</div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">App Development</h3>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        Native and cross-platform mobile applications that deliver exceptional user experiences and drive business growth.
+                    </p>
+                    <button class="text-purple-600 font-bold text-lg hover:text-purple-700 transition-colors">Learn More →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-32 bg-gradient-to-br from-purple-600 to-pink-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-bold mb-6">Testimonials</h2>
+                <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                    What our clients say about working with us
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20">
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                    </div>
+                    <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                        "Hamjakti's work transformed our digital presence. The attention to detail and creative solutions exceeded our expectations. Highly recommended!"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full"></div>
+                        <div>
+                            <p class="font-bold text-lg">Sarah Johnson</p>
+                            <p class="text-white/70">CEO, Tech Startup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20">
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                    </div>
+                    <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                        "Working with Hamjakti was a game-changer for our business. Professional, creative, and always delivers on time. A true partner!"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full"></div>
+                        <div>
+                            <p class="font-bold text-lg">Michael Chen</p>
+                            <p class="text-white/70">Founder, Digital Agency</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider mt-20" style="background: #f9fafb;">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="#f9fafb"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-32 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">FAQ</h2>
+                <p class="text-xl text-gray-600">
+                    Find answers to common questions about our services
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="faq-item bg-white rounded-2xl border-2 border-gray-200 overflow-hidden">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+                        <span class="text-2xl font-bold text-gray-900">What services do you offer?</span>
+                        <span class="text-3xl text-purple-600">+</span>
+                    </button>
+                    <div class="faq-content px-8 pb-6">
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            We offer a comprehensive range of digital services including web design, web development, mobile app development, UI/UX design, and digital marketing strategies tailored to your business needs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-2xl border-2 border-gray-200 overflow-hidden">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+                        <span class="text-2xl font-bold text-gray-900">How long does a project typically take?</span>
+                        <span class="text-3xl text-purple-600">+</span>
+                    </button>
+                    <div class="faq-content px-8 pb-6">
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            Project timelines vary depending on scope and complexity. A simple website might take 4-6 weeks, while more complex applications could take 3-6 months. We'll provide a detailed timeline during the initial consultation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-2xl border-2 border-gray-200 overflow-hidden">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+                        <span class="text-2xl font-bold text-gray-900">What is your pricing model?</span>
+                        <span class="text-3xl text-purple-600">+</span>
+                    </button>
+                    <div class="faq-content px-8 pb-6">
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            We offer flexible pricing models including fixed-price projects, hourly rates, and retainer agreements. The best option depends on your project requirements and business goals. Contact us for a custom quote.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-2xl border-2 border-gray-200 overflow-hidden">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+                        <span class="text-2xl font-bold text-gray-900">Do you provide ongoing support?</span>
+                        <span class="text-3xl text-purple-600">+</span>
+                    </button>
+                    <div class="faq-content px-8 pb-6">
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            Yes! We offer comprehensive post-launch support including maintenance, updates, bug fixes, and performance optimization. We can discuss support packages that fit your needs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">Latest Work</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+                    Explore our recent projects and see how we've helped businesses achieve their digital goals
+                </p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <button class="px-8 py-3 rounded-full bg-purple-600 text-white font-bold text-lg hover:bg-purple-700 transition-colors">All</button>
+                    <button class="px-8 py-3 rounded-full border-2 border-gray-300 text-gray-700 font-bold text-lg hover:border-purple-600 hover:text-purple-600 transition-colors">Web Design</button>
+                    <button class="px-8 py-3 rounded-full border-2 border-gray-300 text-gray-700 font-bold text-lg hover:border-purple-600 hover:text-purple-600 transition-colors">Development</button>
+                    <button class="px-8 py-3 rounded-full border-2 border-gray-300 text-gray-700 font-bold text-lg hover:border-purple-600 hover:text-purple-600 transition-colors">Mobile</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="portfolio-item bg-gradient-to-br from-purple-400 to-pink-400 rounded-3xl h-96 flex items-center justify-center cursor-pointer group overflow-hidden">
+                    <div class="text-center">
+                        <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">🎨</div>
+                        <p class="text-2xl font-bold text-white">Creative Design</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item bg-gradient-to-br from-blue-400 to-cyan-400 rounded-3xl h-96 flex items-center justify-center cursor-pointer group overflow-hidden">
+                    <div class="text-center">
+                        <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">💻</div>
+                        <p class="text-2xl font-bold text-white">Web Platform</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item bg-gradient-to-br from-green-400 to-emerald-400 rounded-3xl h-96 flex items-center justify-center cursor-pointer group overflow-hidden">
+                    <div class="text-center">
+                        <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">📱</div>
+                        <p class="text-2xl font-bold text-white">Mobile App</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item bg-gradient-to-br from-orange-400 to-red-400 rounded-3xl h-96 flex items-center justify-center cursor-pointer group overflow-hidden">
+                    <div class="text-center">
+                        <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">🛍️</div>
+                        <p class="text-2xl font-bold text-white">E-Commerce</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item bg-gradient-to-br from-indigo-400 to-purple-400 rounded-3xl h-96 flex items-center justify-center cursor-pointer group overflow-hidden">
+                    <div class="text-center">
+                        <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">📊</div>
+                        <p class="text-2xl font-bold text-white">Analytics Dashboard</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item bg-gradient-to-br from-pink-400 to-rose-400 rounded-3xl h-96 flex items-center justify-center cursor-pointer group overflow-hidden">
+                    <div class="text-center">
+                        <div class="text-8xl mb-4 group-hover:scale-110 transition-transform">🎬</div>
+                        <p class="text-2xl font-bold text-white">Video Platform</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-32 bg-gradient-to-br from-purple-600 to-pink-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-6xl md:text-7xl font-bold mb-8 leading-tight">
+                        100% Satisfaction Guaranteed
+                    </h2>
+                    <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                        We're committed to delivering exceptional results that exceed your expectations. If you're not satisfied, we'll work until you are.
+                    </p>
+                    <ul class="space-y-6 text-lg">
+                        <li class="flex items-center gap-4">
+                            <span class="text-3xl">✓</span>
+                            <span>Free consultation and project assessment</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="text-3xl">✓</span>
+                            <span>Transparent communication throughout</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="text-3xl">✓</span>
+                            <span>On-time delivery guaranteed</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="text-3xl">✓</span>
+                            <span>Ongoing support and maintenance</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20">
+                    <h3 class="text-3xl font-bold mb-8">Start Your Project</h3>
+                    <form class="space-y-6">
+                        <input type="text" placeholder="Your Name" class="w-full px-6 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 text-lg focus:outline-none focus:border-white/60 transition-colors">
+                        <input type="email" placeholder="Your Email" class="w-full px-6 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 text-lg focus:outline-none focus:border-white/60 transition-colors">
+                        <textarea placeholder="Tell us about your project" rows="5" class="w-full px-6 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 text-lg focus:outline-none focus:border-white/60 transition-colors resize-none"></textarea>
+                        <button type="submit" class="w-full bg-white text-purple-600 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Hamjakti</h3>
+                    <p class="text-gray-400 text-lg">Creating beautiful digital experiences</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Services</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Web Design</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Development</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Mobile Apps</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Marketing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Company</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Follow</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Hamjakti. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0');
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with opacity-0 class
+        document.querySelectorAll('.opacity-0').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Toggle Function
+        function toggleFAQ(button) {
+            const faqItem = button.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current FAQ
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation to elements on page load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.opacity-0').forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.remove('opacity-0');
+                    el.classList.add('animate-fade-in-up');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
 </html>
